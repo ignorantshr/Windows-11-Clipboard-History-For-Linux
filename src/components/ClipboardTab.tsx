@@ -1,7 +1,6 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { listen } from '@tauri-apps/api/event'
 import { clsx } from 'clsx'
-import { Pin, History, ChevronDown } from 'lucide-react'
 
 import type { ClipboardItem, UserSettings } from '../types/clipboard'
 import type { TabBarRef } from './TabBar'
@@ -60,21 +59,6 @@ export function ClipboardTab(props: {
 
   // Refs
   const historyItemRefs = useRef<(HTMLDivElement | null)[]>([])
-
-  // Pinned section collapsible state (persisted)
-  const [pinnedExpanded, setPinnedExpanded] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('clipboard-pinned-expanded')
-      return stored !== null ? stored === 'true' : true
-    }
-    return true
-  })
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('clipboard-pinned-expanded', String(pinnedExpanded))
-    }
-  }, [pinnedExpanded])
 
   // Check if a key is a printable character that should trigger search
   const isPrintableKey = useCallback((e: KeyboardEvent): boolean => {
@@ -236,27 +220,10 @@ export function ClipboardTab(props: {
   const showSections = !searchQuery && pinnedItems.length > 0
 
   // Flat item array for keyboard navigation
-  const visibleItems = showSections && !pinnedExpanded ? unpinnedItems : filteredHistory
+  const visibleItems = filteredHistory
 
-  // Keyboard navigation callbacks for section collapse/expand
-  const onUpFromFirstItem = useCallback(() => {
-    if (showSections && !pinnedExpanded) {
-      setPinnedExpanded(true)
-      const lastIdx = pinnedItems.length - 1
-      setFocusedIndex(lastIdx)
-      setTimeout(() => historyItemRefs.current[lastIdx]?.focus(), 0)
-      return true
-    }
-    return false
-  }, [showSections, pinnedExpanded, pinnedItems.length])
-
-  const onLeftArrow = useCallback(() => {
-    if (showSections && pinnedExpanded && focusedIndex < pinnedItems.length) {
-      setPinnedExpanded(false)
-      setFocusedIndex(0)
-      setTimeout(() => historyItemRefs.current[0]?.focus(), 0)
-    }
-  }, [showSections, pinnedExpanded, focusedIndex, pinnedItems.length])
+  const onUpFromFirstItem = useCallback(() => false, [])
+  const onLeftArrow = useCallback(() => {}, [])
 
   // Keyboard navigation
   useHistoryKeyboardNavigation({
@@ -351,64 +318,37 @@ export function ClipboardTab(props: {
           </p>
         </div>
       ) : (
-        <div className="flex flex-col gap-2 p-3" role="listbox" aria-label="Clipboard history">
+        <div className="flex flex-col gap-1 p-2" role="listbox" aria-label="Clipboard history">
           {showSections ? (
             <>
-              <button
-                onClick={() => {
-                  const willCollapse = pinnedExpanded
-                  setPinnedExpanded(!pinnedExpanded)
-                  if (willCollapse) {
-                    setFocusedIndex(0)
-                    setTimeout(() => historyItemRefs.current[0]?.focus(), 0)
-                  }
-                }}
-                className={clsx(
-                  'flex items-center gap-1.5 px-1 py-1 text-xs font-medium',
-                  'dark:text-win11-text-tertiary text-win11Light-text-tertiary',
-                  'hover:dark:text-win11-text-secondary hover:text-win11Light-text-secondary',
-                  'rounded transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-win11-bg-accent'
-                )}
-                aria-expanded={pinnedExpanded}
-              >
-                <Pin size={12} />
-                <span>Pinned</span>
-                <span className="ml-auto opacity-60">{pinnedItems.length}</span>
-                <ChevronDown
-                  size={12}
+              {pinnedItems.map((item, offset) => (
+                <HistoryItem
+                  key={item.id}
+                  ref={(el) => {
+                    historyItemRefs.current[offset] = el
+                  }}
+                  item={item}
+                  index={offset}
+                  isFocused={offset === focusedIndex}
+                  onPaste={onPaste}
+                  onDelete={deleteItem}
+                  onTogglePin={togglePin}
+                  onFocus={() => setFocusedIndex(offset)}
+                  isDark={isDark}
+                  secondaryOpacity={secondaryOpacity}
+                  isCompact={isCompact}
+                  enableSmartActions={settings.enable_smart_actions}
+                  enableUiPolish={settings.enable_ui_polish}
+                />
+              ))}
+              {unpinnedItems.length > 0 && (
+                <div
+                  aria-hidden="true"
                   className={clsx(
-                    'transition-transform duration-150',
-                    !pinnedExpanded && '-rotate-90'
+                    'mx-1 my-1 h-px',
+                    isDark ? 'bg-white/8' : 'bg-black/8'
                   )}
                 />
-              </button>
-              {pinnedExpanded &&
-                pinnedItems.map((item, offset) => (
-                  <HistoryItem
-                    key={item.id}
-                    ref={(el) => {
-                      historyItemRefs.current[offset] = el
-                    }}
-                    item={item}
-                    index={offset}
-                    isFocused={offset === focusedIndex}
-                    onPaste={onPaste}
-                    onDelete={deleteItem}
-                    onTogglePin={togglePin}
-                    onFocus={() => setFocusedIndex(offset)}
-                    isDark={isDark}
-                    secondaryOpacity={secondaryOpacity}
-                    isCompact={isCompact}
-                    enableSmartActions={settings.enable_smart_actions}
-                    enableUiPolish={settings.enable_ui_polish}
-                  />
-                ))}
-              {unpinnedItems.length > 0 && (
-                <div className="flex items-center gap-1.5 px-1 py-1 text-xs dark:text-win11-text-tertiary text-win11Light-text-tertiary">
-                  <History size={12} />
-                  <span>Recent</span>
-                  <span className="ml-auto opacity-60">{unpinnedItems.length}</span>
-                </div>
               )}
               {unpinnedItems.map((item, offset) => {
                 const idx = pinnedItems.length + offset
