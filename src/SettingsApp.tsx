@@ -184,8 +184,6 @@ function KeyboardShortcutsSection({ isDark }: KeyboardShortcutsSectionProps) {
         >
           {[
             { keys: 'Super + V', desc: 'Open Clipboard History' },
-            { keys: 'Ctrl + Alt + V', desc: 'Alternative shortcut' },
-            { keys: 'Super + .', desc: 'Open Emoji Picker' },
           ].map(({ keys, desc }) => (
             <div key={keys} className="flex items-center justify-between px-4 py-2.5">
               <span

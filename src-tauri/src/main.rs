@@ -780,8 +780,6 @@ fn main() {
         println!();
         println!("SHORTCUTS:");
         println!("    Super+V          Open clipboard history");
-        println!("    Super+.          Open emoji picker");
-        println!("    Ctrl+Alt+V       Alternative shortcut");
         return;
     }
 

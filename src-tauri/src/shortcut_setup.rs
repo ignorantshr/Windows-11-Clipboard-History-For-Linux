@@ -270,12 +270,7 @@ Settings → Keyboard → Customize Shortcuts → Pop Shell"#
 ```
 bindsym $mod+v exec win11-clipboard-history
 ```
-4. Reload i3: Press $mod+Shift+r
-
-**Alternative shortcut:**
-```
-bindsym Ctrl+Mod1+v exec win11-clipboard-history
-```"#
+4. Reload i3: Press $mod+Shift+r"#
             .to_string(),
 
         "Sway" => r#"**Sway Configuration:**
@@ -285,12 +280,7 @@ bindsym Ctrl+Mod1+v exec win11-clipboard-history
 ```
 bindsym $mod+v exec win11-clipboard-history
 ```
-4. Reload Sway: Press $mod+Shift+c
-
-**Alternative shortcut:**
-```
-bindsym Ctrl+Mod1+v exec win11-clipboard-history
-```"#
+4. Reload Sway: Press $mod+Shift+c"#
             .to_string(),
 
         "Hyprland" => r#"**Hyprland Configuration:**
@@ -300,21 +290,14 @@ bindsym Ctrl+Mod1+v exec win11-clipboard-history
 ```
 bind = SUPER, V, exec, win11-clipboard-history
 ```
-4. Config auto-reloads (or press Super+M to reload manually)
-
-**Alternative shortcut:**
-```
-bind = CTRL ALT, V, exec, win11-clipboard-history
-```"#
+4. Config auto-reloads (or press Super+M to reload manually)"#
             .to_string(),
 
         _ => r#"**Generic Instructions:**
 1. Open your desktop environment's keyboard shortcuts settings
 2. Add a new custom shortcut
 3. Command: `win11-clipboard-history`
-4. Shortcut: Super+V (or your preferred combination)
-
-**Alternative:** Use Ctrl+Alt+V if Super+V conflicts with your DE."#
+4. Shortcut: Super+V (or your preferred combination)"#
             .to_string(),
     }
 }

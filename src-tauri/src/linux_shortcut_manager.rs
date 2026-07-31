@@ -96,36 +96,6 @@ const SHORTCUTS: &[ShortcutConfig] = &[
         hyprland_binding: "SUPER, V",
         lxde_binding: "W-v",
     },
-    ShortcutConfig {
-        id: "win11-clipboard-history-alt",
-        name: "Clipboard History (Alt)",
-        command: "win11-clipboard-history", // Will be replaced at runtime
-        args: "",
-        gnome_binding: "<Ctrl><Alt>v",
-        kde_binding: "Ctrl+Alt+V",
-        xfce_binding: "<Primary><Alt>v",
-        cosmic_mods: "Ctrl, Alt",
-        cosmic_key: "v",
-        i3_binding: "Ctrl+Mod1+v",
-        sway_binding: "Ctrl+Mod1+v",
-        hyprland_binding: "CTRL ALT, V",
-        lxde_binding: "C-A-v",
-    },
-    ShortcutConfig {
-        id: "win11-clipboard-history-emoji",
-        name: "Emoji Picker",
-        command: "win11-clipboard-history", // Will be replaced at runtime
-        args: "--emoji",
-        gnome_binding: "<Super>period",
-        kde_binding: "Meta+.",
-        xfce_binding: "<Super>period",
-        cosmic_mods: "Super",
-        cosmic_key: "period",
-        i3_binding: "$mod+period",
-        sway_binding: "$mod+period",
-        hyprland_binding: "SUPER, period",
-        lxde_binding: "W-period",
-    },
 ];
 
 // =============================================================================

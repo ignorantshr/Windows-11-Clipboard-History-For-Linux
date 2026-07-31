@@ -5,7 +5,7 @@
 
 # Windows 11 Clipboard History For Linux
 
-[Website](https://clipboard.gustavosett.dev) • [Report Bug](https://github.com/gustavosett/Windows-11-Clipboard-History-For-Linux/issues) • [Request Feature](https://github.com/gustavosett/Windows-11-Clipboard-History-For-Linux/discussions/new?category=ideas)
+[Website](https://clipboard.gustavosett.dev) • [Report Bug](https://github.com/ignorantshr/Windows-11-Clipboard-History-For-Linux/issues) • [Request Feature](https://github.com/ignorantshr/Windows-11-Clipboard-History-For-Linux/discussions/new?category=ideas)
 
 **The aesthetic, feature-rich clipboard manager your Linux desktop deserves.**
 
@@ -26,7 +26,7 @@ Get up and running in seconds. This script detects your distro, installs the app
 
 ```bash
 # Just copy and paste this into your terminal
-curl -fsSL https://raw.githubusercontent.com/gustavosett/Windows-11-Clipboard-History-For-Linux/master/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/ignorantshr/Windows-11-Clipboard-History-For-Linux/master/scripts/install.sh | bash
 ```
 
 > **Note:** No logout required! The installer uses ACLs to grant immediate access.
@@ -40,7 +40,7 @@ Most Linux clipboard managers are purely functional but lack visual appeal. This
 | 😎 | 🔍 |
 | --- | --- |
 | **🐧 Universal Support** | Works flawlessly on both **Wayland** & **X11**. |
-| **⚡ Instant Access** | Opens instantly with `Super+V` or `Ctrl+Alt+V`. |
+| **⚡ Instant Access** | Opens instantly with `Super+V`. |
 | **🧠 Smart Positioning** | The window follows your mouse cursor across multiple monitors. |
 | **📌 Pin & Sync** | Pin important snippets to keep them at the top. |
 | **🎬 ~~GIF Integration~~** | ~~Search Tenor and paste GIFs directly into Discord, Slack, etc.~~ **Disabled:** [Google killed the Tenor GIF API](https://arstechnica.com/gadgets/2026/06/google-kills-tenor-gif-api-forcing-changes-at-x-discord-and-more/). |
@@ -54,7 +54,6 @@ Most Linux clipboard managers are purely functional but lack visual appeal. This
 | Key | Action |
 | --- | --- |
 | <kbd>Super</kbd> + <kbd>V</kbd> | **Open Clipboard History** |
-| <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>V</kbd> | Alternative Shortcut |
 | <kbd>Enter</kbd> | Paste Selected Item |
 | <kbd>Esc</kbd> | Close Window |
 
@@ -121,7 +120,7 @@ paru -S win11-clipboard-history-bin
 
 > ## Some features are disabled; we strongly recommend the complete installation.
 
-1. Download the `.AppImage` from [Releases](https://github.com/gustavosett/Windows-11-Clipboard-History-For-Linux/releases).
+1. Download the `.AppImage` from [Releases](https://github.com/ignorantshr/Windows-11-Clipboard-History-For-Linux/releases).
 2. Make it executable: `chmod +x win11-clipboard-history_*.AppImage`
 3. Grant permissions: `sudo setfacl -m u:$USER:rw /dev/uinput`
 4. Register the command that you want in your system to open the AppImage
@@ -183,7 +182,7 @@ Want to hack on the code?
 
 ```bash
 # 1. Clone
-git clone https://github.com/gustavosett/Windows-11-Clipboard-History-For-Linux.git
+git clone https://github.com/ignorantshr/Windows-11-Clipboard-History-For-Linux.git
 cd Windows-11-Clipboard-History-For-Linux
 
 # 2. Install Deps
