@@ -24,15 +24,14 @@ export const HistoryItem = forwardRef<HTMLDivElement, HistoryItemProps>(function
   {
     item,
     onPaste,
-    onDelete,
-    onTogglePin,
+    // onDelete / onTogglePin / enableSmartActions are still part of the props
+    // contract (callers pass them) but are unused since the layout was simplified.
     onFocus,
     index,
     isFocused = false,
     isDark,
     secondaryOpacity,
     isCompact = false,
-    enableSmartActions,
     enableUiPolish,
   },
   ref
