@@ -13,7 +13,7 @@ jobs:
   # Lint and format check
   lint:
     name: Lint & Format
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
@@ -38,7 +38,7 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             src-tauri/target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-ubuntu-22.04-${{ runner.arch }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Install dependencies
         run: |
@@ -65,7 +65,7 @@ jobs:
   # Build for Linux
   build-linux:
     name: Build Linux
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: lint
     steps:
       - name: Checkout repository
@@ -89,7 +89,7 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             src-tauri/target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-ubuntu-22.04-${{ runner.arch }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Install system dependencies
         run: |
@@ -117,7 +117,7 @@ jobs:
   # Security audit
   security:
     name: Security Audit
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7

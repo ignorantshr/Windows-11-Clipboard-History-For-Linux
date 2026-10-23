@@ -25,12 +25,13 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # Build against Ubuntu 22.04's glibc baseline for older desktops.
           - arch: x86_64
-            runner: ubuntu-latest
+            runner: ubuntu-22.04
             deb_arch: amd64
             rpm_arch: x86_64
           - arch: aarch64
-            runner: ubuntu-24.04-arm
+            runner: ubuntu-22.04-arm
             deb_arch: arm64
             rpm_arch: aarch64
     steps:
@@ -67,7 +68,7 @@ jobs:
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             src-tauri/target/
-          key: ${{ runner.os }}-${{ matrix.arch }}-cargo-release-${{ hashFiles('**/Cargo.lock') }}
+          key: ${{ runner.os }}-${{ matrix.runner }}-${{ matrix.arch }}-cargo-release-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Install system dependencies
         run: |
