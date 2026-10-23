@@ -80,23 +80,21 @@ fn get_command_path() -> &'static str {
     "win11-clipboard-history"
 }
 
-const SHORTCUTS: &[ShortcutConfig] = &[
-    ShortcutConfig {
-        id: "win11-clipboard-history",
-        name: "Clipboard History",
-        command: "win11-clipboard-history", // Will be replaced at runtime
-        args: "",
-        gnome_binding: "<Super>v",
-        kde_binding: "Meta+V",
-        xfce_binding: "<Super>v",
-        cosmic_mods: "Super",
-        cosmic_key: "v",
-        i3_binding: "$mod+v",
-        sway_binding: "$mod+v",
-        hyprland_binding: "SUPER, V",
-        lxde_binding: "W-v",
-    },
-];
+const SHORTCUTS: &[ShortcutConfig] = &[ShortcutConfig {
+    id: "win11-clipboard-history",
+    name: "Clipboard History",
+    command: "win11-clipboard-history", // Will be replaced at runtime
+    args: "",
+    gnome_binding: "<Super>v",
+    kde_binding: "Meta+V",
+    xfce_binding: "<Super>v",
+    cosmic_mods: "Super",
+    cosmic_key: "v",
+    i3_binding: "$mod+v",
+    sway_binding: "$mod+v",
+    hyprland_binding: "SUPER, V",
+    lxde_binding: "W-v",
+}];
 
 // =============================================================================
 // Error Handling
